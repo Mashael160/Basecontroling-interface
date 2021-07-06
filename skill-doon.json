@@ -1,0 +1,324 @@
+{
+  "intents": [
+    {
+      "intent": "الترحيب",
+      "examples": [
+        {
+          "text": "السلام عليكم"
+        },
+        {
+          "text": "مرحبا"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "حجز",
+      "examples": [
+        {
+          "text": "٥"
+        },
+        {
+          "text": "احجز"
+        },
+        {
+          "text": "السبت"
+        },
+        {
+          "text": "هل متوفر حجز"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sys-currency",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-date",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-number",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "sys-time",
+      "values": [],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "طيران",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "رحلة",
+          "synonyms": [
+            "تذكرة",
+            "طيران"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "رحلة الى",
+          "synonyms": [
+            "الرياض",
+            "جدة"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_10_1625606057306",
+      "event_name": "focus",
+      "dialog_node": "handler_10_1625606057326",
+      "previous_sibling": "handler_1_1625606057326"
+    },
+    {
+      "type": "event_handler",
+      "parent": "slot_10_1625606057306",
+      "event_name": "input",
+      "dialog_node": "handler_1_1625606057326"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_10_1625607225241",
+      "context": {
+        "date": "@sys-date"
+      },
+      "conditions": "@sys-date",
+      "event_name": "input",
+      "dialog_node": "handler_3_1625607225291"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "مالوقت المناسب"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_3_1625607247176",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1625607247177",
+      "previous_sibling": "handler_9_1625607247177"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_7_1625607279199",
+      "context": {
+        "number": "@sys-number"
+      },
+      "conditions": "@sys-number",
+      "event_name": "input",
+      "dialog_node": "handler_5_1625607279200"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "كم عدد المسافرين"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_7_1625607279199",
+      "event_name": "focus",
+      "dialog_node": "handler_6_1625607279200",
+      "previous_sibling": "handler_5_1625607279200"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ماليوم المناسب"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "slot_10_1625607225241",
+      "event_name": "focus",
+      "dialog_node": "handler_8_1625607225291",
+      "previous_sibling": "handler_3_1625607225291"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_3_1625607247176",
+      "context": {
+        "time": "@sys-time"
+      },
+      "conditions": "@sys-time",
+      "event_name": "input",
+      "dialog_node": "handler_9_1625607247177"
+    },
+    {
+      "type": "frame",
+      "title": "ترحيب ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "ياهلا اسألني"
+              },
+              {
+                "text": "مرحبا بك"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#الترحيب",
+      "dialog_node": "node_3_1625602162838",
+      "previous_sibling": "مرحبا"
+    },
+    {
+      "type": "frame",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "يشرفني ان ابلغك بانه تم الحجز بنجاح"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#حجز",
+      "dialog_node": "node_6_1625607192907",
+      "previous_sibling": "node_3_1625602162838"
+    },
+    {
+      "type": "slot",
+      "parent": "node_3_1625602162838",
+      "dialog_node": "slot_10_1625606057306"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1625607192907",
+      "variable": "$date",
+      "dialog_node": "slot_10_1625607225241"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1625607192907",
+      "variable": "$time",
+      "dialog_node": "slot_3_1625607247176",
+      "previous_sibling": "slot_10_1625607225241"
+    },
+    {
+      "type": "slot",
+      "parent": "node_6_1625607192907",
+      "variable": "$number",
+      "dialog_node": "slot_7_1625607279199",
+      "previous_sibling": "slot_3_1625607247176"
+    },
+    {
+      "type": "standard",
+      "title": "أي شيء آخر",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "لم أفهم، يمكنك محاولة اعادة الصياغة"
+              },
+              {
+                "text": "عفوا مافهمت عليك "
+              },
+              {
+                "text": "ممكن تفهمني اكثر"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "أي شيء آخر",
+      "previous_sibling": "node_6_1625607192907",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "مرحبا",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "مرحبا،  كيف يمكني مساعدتك؟"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "مرحبا"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": ":هل قصدت",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "كل ما سبق خطأ"
+    },
+    "human_agent_assist": {
+      "prompt": ":هل قصدت"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "doon",
+  "language": "ar",
+  "description": ""
+}
